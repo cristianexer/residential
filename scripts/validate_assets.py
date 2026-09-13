@@ -59,8 +59,9 @@ def main() -> None:
     materials = gltf.get("materials", [])
     images = gltf.get("images", [])
     textures = gltf.get("textures", [])
-    assert len(nodes) >= 2_500, f"hierarchy unexpectedly small: {len(nodes)} nodes"
-    assert len(meshes) >= 2_400, f"mesh export unexpectedly small: {len(meshes)} meshes"
+    assert nodes and meshes, "empty model"
+    assert len(nodes) >= 4_000, f"scene hierarchy unexpectedly small: {len(nodes)} nodes"
+    assert len(meshes) >= 4_000, f"scene geometry unexpectedly small: {len(meshes)} meshes"
     assert len(materials) >= 40, f"material library unexpectedly small: {len(materials)} materials"
     assert len(images) >= 8 and len(textures) >= 8, "embedded texture set is incomplete"
 
@@ -91,16 +92,16 @@ def main() -> None:
         assert_finite(node.get("scale", []), f"node[{index}].scale")
         if node.get("extras"):
             extras_count += 1
-    assert extras_count >= 2_500, "semantic metadata was lost from the hierarchy"
+    assert extras_count >= len(nodes) * 0.95, "semantic metadata was lost from the hierarchy"
 
     primitives = [primitive for mesh in meshes for primitive in mesh.get("primitives", [])]
     missing_uv = sum("TEXCOORD_0" not in primitive.get("attributes", {}) for primitive in primitives)
     assert not missing_uv, f"{missing_uv} exported primitives have no UV channel"
 
-    assert manifest.get("sceneVersion") == "2.0.0"
+    assert manifest.get("sceneVersion") in ("2.0.0", "2.1.0")
     assert manifest.get("release", {}).get("browserModel") == "assets/intermedia-residential.glb"
     assert manifest.get("release", {}).get("collision")
-    assert manifest.get("lighting", {}).get("daySunNode") == "LGT-DaySun"
+    assert manifest.get("lighting", {}).get("exportedLights") is False
     verified = manifest.get("verified", {})
     assert verified.get("buildingCount") == 3
     assert verified.get("buildingLevels") == "P+3"
@@ -111,7 +112,27 @@ def main() -> None:
     assert licenses.get("schemaVersion") == 1
     assert licenses.get("externalAssets") == []
     assert "file://" not in html, "viewer should be opened through HTTP, not file://"
-    assert "intermedia-residential.glb" in html, "viewer does not reference the released GLB"
+    viewer = (ROOT / "dist/viewer.js").read_text()
+    assert "intermedia-residential.glb" in viewer, "viewer does not reference the released GLB"
+    assert 'role="listbox"' in viewer and "component-picker-button" in viewer, "component picker is not the branded custom listbox"
+    assert "quality-picker-button" in viewer and "quality-list" in viewer and "quality-select" not in html, "quality picker is not the branded custom listbox"
+    assert "axis-picker-button" in viewer and "axis-list" in viewer and "section-axis" not in html, "section orientation is not the branded custom listbox"
+    assert "selectionMarker" in viewer, "selected-element marker is missing"
+    assert "SITE_EntranceMarketing" in names and "SITE_SideMarketing" in names, "3D marketing banners missing"
+    assert "promo-banner" not in html, "marketing banner should live in the 3D scene, not the sidebar"
+    assert html.count('type="range"') == 1, "the dock must have exactly one functional layer slider"
+    assert 'class="progress-track"' not in html, "duplicate decorative track returned"
+    for block in ("A", "B", "C"):
+        building_index = next(i for i,n in enumerate(nodes) if n.get("name") == f"BLK-{block}")
+        children = nodes[building_index].get("children", [])
+        for floor in range(4):
+            floor_index = next(i for i,n in enumerate(nodes) if n.get("name") == f"BLK-{block}_F{floor}")
+            assert floor_index in children, "floor must be parented to its building"
+            assert nodes[floor_index].get("extras", {}).get("floor_index") == floor
+    if manifest.get("lighting", {}).get("exportedLights") is False:
+        assert not any("_GraphiteField" in str(n) or "_GroundBand" in str(n) for n in names), "opaque facade overlays returned"
+        assert any("WhiteTrim" in str(n) for n in names), "window surrounds missing"
+        assert any(m.get("normalTexture") for m in materials), "surface normal maps missing"
 
     print(
         "asset validation passed: "

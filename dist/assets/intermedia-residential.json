@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "sceneVersion": "2.0.0",
+  "assetRevision": "4d62030af51a",
   "units": "meters",
   "coordinateSystem": "Blender Z-up authoring, glTF Y-up export",
   "source": "INTERMEDIA reference renders and supplied marketing brief",
@@ -9,7 +10,7 @@
     "sceneSource": "../blender/exports/intermedia-residential.blend",
     "manifest": "assets/intermedia-residential.json",
     "licenses": "assets/licenses.json",
-    "collision": "Embedded nodes with role=collision; browser builds AABBs at load time",
+    "collision": "Embedded nodes with role=collision; viewer uses triangle raycasting",
     "bakedLighting": null
   },
   "bounds": {
@@ -32,8 +33,9 @@
     }
   },
   "lighting": {
-    "daySunNode": "LGT-DaySun",
-    "browserSunIntensity": 35,
+    "daySunNode": null,
+    "browserSunIntensity": 3.0,
+    "exportedLights": false,
     "interiorBaking": "not bundled; browser uses authored materials and viewer lights"
   },
   "verified": {

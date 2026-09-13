@@ -27,6 +27,12 @@ jobs:
       - name: Validate browser assets
         run: python3 scripts/validate_assets.py
 
+      - name: Validate browser entrypoint
+        run: node --check dist/viewer.js
+
+      - name: Verify Pages package
+        run: test -f dist/index.html && test -f dist/viewer.js && test -f dist/assets/intermedia-residential.glb && test -f dist/assets/intermedia-residential.json
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

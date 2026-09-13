@@ -19,8 +19,8 @@ TIMEOUT_SECONDS = 30
 class McpProcess:
     def __init__(self) -> None:
         env = os.environ.copy()
-        env["BLENDER_HOST"] = "127.0.0.1"
-        env["BLENDER_PORT"] = "9876"
+        env["BLENDER_MCP_HOST"] = "127.0.0.1"
+        env["BLENDER_MCP_PORT"] = env.get("BLENDER_MCP_PORT", "9876")
         self.process = subprocess.Popen(
             ["uv", "run", "--project", str(PROJECT), "blender-mcp"],
             cwd=ROOT,

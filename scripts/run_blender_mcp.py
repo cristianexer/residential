@@ -13,16 +13,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "blender" / "mcp"
+LOCAL_SERVER = PROJECT / ".venv" / "bin" / "blender-mcp"
 TIMEOUT_SECONDS = 180
 
 
 class McpClient:
     def __init__(self) -> None:
         env = os.environ.copy()
-        env["BLENDER_HOST"] = "127.0.0.1"
-        env["BLENDER_PORT"] = "9876"
+        env["BLENDER_MCP_HOST"] = "127.0.0.1"
+        env["BLENDER_MCP_PORT"] = env.get("BLENDER_MCP_PORT", "9876")
+        server_command = [str(LOCAL_SERVER)] if LOCAL_SERVER.exists() else ["uv", "run", "--project", str(PROJECT), "blender-mcp"]
         self.process = subprocess.Popen(
-            ["uv", "run", "--project", str(PROJECT), "blender-mcp"],
+            server_command,
             cwd=ROOT,
             env=env,
             stdin=subprocess.PIPE,
@@ -90,7 +92,13 @@ def main() -> int:
         print(f"usage: {sys.argv[0]} PATH_TO_BLENDER_PYTHON", file=sys.stderr)
         return 2
     code_path = Path(sys.argv[1]).resolve()
-    code = code_path.read_text(encoding="utf-8")
+    # Keep the MCP payload small and let Blender read the project-owned script
+    # from the shared checkout. Large inline source payloads can exceed the
+    # bridge's JSON response buffer when a procedural scene grows.
+    code = (
+        "import runpy\n"
+        f"result = runpy.run_path({str(code_path)!r}, run_name='__intermedia_mcp__').get('result')\n"
+    )
     client = McpClient()
     try:
         client.request(
@@ -106,8 +114,22 @@ def main() -> int:
             "tools/call",
             {"name": "execute_blender_code", "arguments": {"code": code}},
         )
-        print(json.dumps(result, indent=2))
-        return 0 if not result.get("isError", False) else 1
+        payload = result.get("structuredContent")
+        if payload is None:
+            for block in result.get("content", []):
+                if block.get("type") == "text":
+                    try:
+                        payload = json.loads(block["text"])
+                    except json.JSONDecodeError:
+                        payload = {"message": block["text"]}
+                    break
+        payload = dict(payload or {})
+        for key in ("stdout", "stderr"):
+            if isinstance(payload.get(key), str) and len(payload[key]) > 1600:
+                payload[key] = "[earlier export log omitted]\n" + payload[key][-1600:]
+        failed = result.get("isError", False) or payload.get("status") == "error"
+        print(json.dumps({"isError": failed, "result": payload}, indent=2))
+        return 1 if failed else 0
     except (OSError, RuntimeError, TimeoutError) as error:
         print(f"Blender MCP call failed: {error}", file=sys.stderr)
         return 1
