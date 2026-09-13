@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "sceneVersion": "2.0.0",
+  "units": "meters",
+  "coordinateSystem": "Blender Z-up authoring, glTF Y-up export",
+  "source": "INTERMEDIA reference renders and supplied marketing brief",
+  "release": {
+    "browserModel": "assets/intermedia-residential.glb",
+    "sceneSource": "../blender/exports/intermedia-residential.blend",
+    "manifest": "assets/intermedia-residential.json",
+    "licenses": "assets/licenses.json",
+    "collision": "Embedded nodes with role=collision; browser builds AABBs at load time",
+    "bakedLighting": null
+  },
+  "bounds": {
+    "siteMeters": {
+      "min": [
+        -60.0,
+        -38.0,
+        -0.62
+      ],
+      "max": [
+        60.0,
+        66.0,
+        -0.06
+      ]
+    },
+    "buildingFootprintMeters": {
+      "width": 28.0,
+      "depth": 13.0,
+      "height": 14.0
+    }
+  },
+  "lighting": {
+    "daySunNode": "LGT-DaySun",
+    "browserSunIntensity": 35,
+    "interiorBaking": "not bundled; browser uses authored materials and viewer lights"
+  },
+  "verified": {
+    "studioUsableAreaM2": 30.3,
+    "studioBalconyAreaM2": 6.6,
+    "buildingLevels": "P+3",
+    "buildingCount": 3
+  },
+  "inferred": {
+    "twoRoomAndThreeRoomAreas": true,
+    "roomPartitions": true,
+    "siteContext": true
+  },
+  "buildings": [
+    {
+      "id": "A",
+      "centerY": -4.0,
+      "levels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "B",
+      "centerY": 18.0,
+      "levels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "C",
+      "centerY": 40.0,
+      "levels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "apartments": {
+    "Studio": {
+      "building": "A",
+      "floor": 1,
+      "usableAreaM2": 30.3,
+      "balconyAreaM2": 6.6,
+      "inferred": false
+    },
+    "2Room": {
+      "building": "B",
+      "floor": 2,
+      "usableAreaM2": 43.4,
+      "balconyAreaM2": 6.6,
+      "inferred": true
+    },
+    "3Room": {
+      "building": "C",
+      "floor": 3,
+      "usableAreaM2": 55.9,
+      "balconyAreaM2": 6.6,
+      "inferred": true
+    }
+  },
+  "viewpoints": {
+    "overview": {
+      "position": [
+        59,
+        -72,
+        48
+      ],
+      "target": [
+        0,
+        14,
+        5.5
+      ]
+    },
+    "courtyard": {
+      "position": [
+        31,
+        -22,
+        5.8
+      ],
+      "target": [
+        0,
+        2,
+        4.8
+      ]
+    },
+    "facade": {
+      "position": [
+        29,
+        -31,
+        11.5
+      ],
+      "target": [
+        0,
+        -4,
+        6.3
+      ]
+    }
+  },
+  "roles": [
+    "building",
+    "floor",
+    "floor_slab",
+    "ceiling",
+    "facade",
+    "facade_panel",
+    "window_glazing",
+    "apartment_shell",
+    "detailed_apartment",
+    "balcony",
+    "roof",
+    "circulation",
+    "vehicle",
+    "landscape_tree",
+    "collision"
+  ]
+}

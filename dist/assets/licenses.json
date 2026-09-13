@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "project": "INTERMEDIA Residential Explorer",
+  "externalAssets": [],
+  "proceduralAssets": [
+    {
+      "scope": "intermedia-residential.glb",
+      "creator": "Project-owned Blender/MCP generator",
+      "license": "Original project output"
+    }
+  ],
+  "brandReference": {
+    "source": "https://www.vanzarialba.ro/",
+    "use": "INTERMEDIA name, palette and architectural reference only",
+    "redistributedLogoAsset": false
+  },
+  "notes": "No third-party raster textures or paid model assets are bundled; material maps are generated procedurally in Blender."
+}

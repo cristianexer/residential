@@ -1,0 +1,6 @@
+blender/mcp/.venv/
+**/__pycache__/
+output/playwright/
+.playwright-cli/
+.DS_Store
+blender/exports/*.blend1
