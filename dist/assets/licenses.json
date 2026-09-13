@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "project": "INTERMEDIA Residential Explorer",
+  "projectLicense": "MIT",
+  "licenseFile": "../../LICENSE",
   "externalAssets": [],
   "proceduralAssets": [
     {

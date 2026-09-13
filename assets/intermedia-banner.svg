@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" role="img" aria-labelledby="title desc">
+  <title id="title">INTERMEDIA residential explorer</title>
+  <desc id="desc">An animated blue and gold architectural banner showing a stylised residential complex and the words INTERMEDIA residential explorer.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#031746"/>
+      <stop offset="0.55" stop-color="#063a92"/>
+      <stop offset="1" stop-color="#0b6e9d"/>
+    </linearGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#0e7da8" stop-opacity="0"/>
+      <stop offset="0.48" stop-color="#54d4df" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#f0bd54" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f3d17b"/>
+      <stop offset="1" stop-color="#b9782c"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#83f3ee" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#0a3b89" stop-opacity=".08"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="skewY(-12)">
+      <path d="M40 0H0V40" fill="none" stroke="#b8eff2" stroke-opacity=".09"/>
+    </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <clipPath id="scene-clip"><rect width="668" height="464" rx="28"/></clipPath>
+    <style>
+      .label { font: 700 13px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: .18em; }
+      .tiny { font: 700 10px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: .14em; }
+      .wordmark { font: 800 62px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: .08em; }
+      .subhead { font: 500 19px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: .16em; }
+      .building-line { fill: url(#glass); stroke: #86e8ed; stroke-opacity: .72; stroke-width: 1.5; }
+      .floor-line { stroke: #a9e9ea; stroke-opacity: .35; stroke-width: 1; }
+      .float { animation: float 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .float-slow { animation: float 10s ease-in-out -3s infinite; transform-box: fill-box; transform-origin: center; }
+      .blink { animation: blink 3.8s ease-in-out infinite; }
+      .dash { animation: dash 12s linear infinite; }
+      .dash-reverse { animation: dash 15s linear reverse infinite; }
+      .scan { animation: scan 6s ease-in-out infinite; }
+      .pulse { animation: pulse 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      @keyframes blink { 0%,32%,46%,100% { opacity: .25; } 38%,42% { opacity: 1; } }
+      @keyframes dash { to { stroke-dashoffset: -240; } }
+      @keyframes scan { 0%,100% { transform: translateY(-10px); opacity: 0; } 18%,78% { opacity: .65; } 50% { transform: translateY(380px); } }
+      @keyframes pulse { 0%,100% { opacity: .35; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+    </style>
+  </defs>
+
+  <rect width="1600" height="520" rx="30" fill="url(#sky)"/>
+  <rect width="1600" height="520" rx="30" fill="url(#grid)"/>
+  <circle cx="1270" cy="140" r="180" fill="#54d4df" opacity=".12" filter="url(#soft-glow)"/>
+  <circle cx="1470" cy="420" r="130" fill="#f2bf59" opacity=".13" filter="url(#soft-glow)"/>
+
+  <g aria-hidden="true" opacity=".6">
+    <circle cx="1020" cy="94" r="2.5" fill="#f0c86c" class="pulse"/>
+    <circle cx="1125" cy="198" r="2" fill="#91f3ee" class="pulse" style="animation-delay:-1.2s"/>
+    <circle cx="1370" cy="78" r="2.5" fill="#f0c86c" class="pulse" style="animation-delay:-2.1s"/>
+    <circle cx="1518" cy="238" r="2" fill="#91f3ee" class="pulse" style="animation-delay:-.6s"/>
+    <circle cx="1290" cy="385" r="2" fill="#f0c86c" class="pulse" style="animation-delay:-1.8s"/>
+  </g>
+
+  <g transform="translate(78 78)">
+    <path d="M0 0h52" stroke="url(#gold)" stroke-width="3"/>
+    <text y="31" fill="#e8fafa" class="label">OPEN 3D SCENE</text>
+    <text y="126" fill="#fff" class="wordmark">INTERMEDIA</text>
+    <text y="169" fill="#c4fbf7" class="subhead">RESIDENTIAL EXPLORER</text>
+    <path d="M0 204h390" stroke="#a5eaec" stroke-opacity=".35"/>
+    <text y="239" fill="#d9f6f4" class="label">STEP INSIDE THE MODEL</text>
+    <text y="270" fill="#a7d8e0" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">Explore every block, floor and furnished home.</text>
+
+    <g transform="translate(0 321)">
+      <rect width="390" height="60" rx="14" fill="#fff" fill-opacity=".1" stroke="#d7ffff" stroke-opacity=".3"/>
+      <circle cx="30" cy="30" r="13" fill="url(#gold)"/>
+      <path d="M26 30h9M31 25l5 5-5 5" fill="none" stroke="#173475" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="58" y="26" fill="#fff" class="tiny">INTERACTIVE VIEWS</text>
+      <text x="58" y="44" fill="#b7e9e9" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="13">Exterior · Exploded · Cutaway · Floors</text>
+    </g>
+  </g>
+
+  <g clip-path="url(#scene-clip)" transform="translate(892 28)">
+    <rect width="668" height="464" fill="#062b6c" fill-opacity=".18"/>
+    <path d="M-30 374L230 258l500 90v125H-30Z" fill="#031e55" fill-opacity=".55"/>
+    <path d="M-20 390L215 300l497 72" fill="none" stroke="url(#horizon)" stroke-width="2"/>
+    <path d="M-20 416L215 326l497 72" fill="none" stroke="#a5eaec" stroke-opacity=".15"/>
+    <path d="M-20 444L215 354l497 72" fill="none" stroke="#a5eaec" stroke-opacity=".12"/>
+    <path d="M-20 472L215 382l497 72" fill="none" stroke="#a5eaec" stroke-opacity=".1"/>
+
+    <g transform="translate(82 108)"><g class="float-slow">
+      <path class="building-line" d="M0 282V112l156-82 94 45v207z"/>
+      <path class="floor-line" d="M0 155l250 37M0 198l250 37M0 241l250 37"/>
+      <path d="M156 30v252M204 53v235" stroke="#b5f3f0" stroke-opacity=".38"/>
+      <path d="M40 132l90-47v24l-90 48zM40 174l90-47v24l-90 48zM40 216l90-47v24l-90 48z" fill="#f5c969" fill-opacity=".68"/>
+      <path d="M165 75l27 13v24l-27-12zM165 118l27 13v24l-27-12zM165 161l27 13v24l-27-12zM165 204l27 13v24l-27-12z" fill="#8beae9" fill-opacity=".5"/>
+    </g></g>
+
+    <g transform="translate(292 72)"><g class="float">
+      <path class="building-line" d="M0 318V83L111 23l145 63v232z"/>
+      <path class="floor-line" d="M0 136l256 39M0 185l256 39M0 233l256 39M0 282l256 39"/>
+      <path d="M111 23v295M183 55v282" stroke="#b5f3f0" stroke-opacity=".4"/>
+      <path d="M23 107l66-35v25l-66 36zM23 154l66-35v25l-66 36zM23 202l66-35v25l-66 36zM23 250l66-35v25l-66 36z" fill="#f5c969" fill-opacity=".75"/>
+      <path d="M130 59l33 14v27l-33-14zM130 107l33 14v27l-33-14zM130 155l33 14v27l-33-14zM130 203l33 14v27l-33-14zM130 251l33 14v27l-33-14z" fill="#8beae9" fill-opacity=".54"/>
+      <path d="M201 90l34 15v27l-34-15zM201 138l34 15v27l-34-15zM201 186l34 15v27l-34-15zM201 234l34 15v27l-34-15z" fill="#f5c969" fill-opacity=".55"/>
+    </g></g>
+
+    <g transform="translate(505 143)"><g class="float-slow">
+      <path class="building-line" d="M0 247V81l82-43 77 35v174z"/>
+      <path class="floor-line" d="M0 122l159 27M0 164l159 27M0 206l159 27"/>
+      <path d="M82 38v209M122 56v201" stroke="#b5f3f0" stroke-opacity=".38"/>
+      <path d="M17 111l51-27v21l-51 28zM17 153l51-27v21l-51 28zM17 195l51-27v21l-51 28z" fill="#f5c969" fill-opacity=".72"/>
+      <path d="M97 75l18 8v22l-18-8zM97 117l18 8v22l-18-8zM97 159l18 8v22l-18-8zM97 201l18 8v22l-18-8z" fill="#8beae9" fill-opacity=".5"/>
+    </g></g>
+
+    <g aria-hidden="true">
+      <circle cx="412" cy="70" r="120" fill="none" stroke="#91f3ee" stroke-opacity=".27" stroke-width="1" stroke-dasharray="7 13" class="dash"/>
+      <circle cx="412" cy="70" r="170" fill="none" stroke="#f0c86c" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 18" class="dash-reverse"/>
+      <path d="M170 465C268 310 420 266 674 290" fill="none" stroke="#f1c568" stroke-opacity=".55" stroke-width="2" stroke-dasharray="3 11" class="dash"/>
+      <path d="M20 54h628" stroke="#8beae9" stroke-opacity=".34" stroke-width="1" class="scan"/>
+      <circle cx="432" cy="203" r="5" fill="#f5cf78" filter="url(#glow)" class="pulse"/>
+      <circle cx="432" cy="203" r="16" fill="none" stroke="#f5cf78" stroke-opacity=".5" class="pulse"/>
+    </g>
+
+    <g transform="translate(462 26)">
+      <rect width="178" height="32" rx="16" fill="#051e56" fill-opacity=".8" stroke="#b5f3f0" stroke-opacity=".25"/>
+      <circle cx="19" cy="16" r="4" fill="#f2c45f" class="blink"/>
+      <text x="33" y="20" fill="#d9f6f4" class="tiny">P+3 · 03 BLOCKS</text>
+    </g>
+  </g>
+
+  <rect x="892" y="28" width="668" height="464" rx="28" fill="none" stroke="#d7ffff" stroke-opacity=".28"/>
+  <path d="M78 466h390" stroke="url(#gold)" stroke-width="3"/>
+  <text x="1522" y="480" fill="#b4eeee" class="tiny" text-anchor="end">ARCHITECTURE / LIGHT / PLACE</text>
+</svg>
