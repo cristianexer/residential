@@ -17,12 +17,13 @@ For a local preview (HTTP is required for GLB loading):
 python3 -m http.server 4173 --directory dist
 ```
 
-Open `http://127.0.0.1:4173/` and use the Exterior, Explodat, Secțiune and
-Etaje controls. Select a block or one of the three furnished in-building homes;
+Open `http://127.0.0.1:4173/` and use the Exterior, Exploded, Cutaway and Floors
+controls. English is the default interface language; use the flag picker in the
+top bar to switch to Romanian. Select a block or one of the three furnished in-building homes;
 the remaining illustrative flats also carry reusable kitchen, living, sleeping
 and bathroom furniture sets. Dimensional INTERMEDIA marketing signs live in
-the 3D site scene near the entrance and parking edge. Click a visible
-component for its inspector, framing and isolation controls.
+the 3D site scene near the entrance and parking edge. Click a visible component
+for its inspector, framing and isolation controls.
 The single blue-to-gold bottom slider controls separation, section position, or
 floor level. Sections cap individual structural solids, not whole room voids.
 Walkthrough uses floor-height and obstacle raycasts against architectural meshes.

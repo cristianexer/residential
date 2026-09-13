@@ -112,11 +112,14 @@ def main() -> None:
     assert licenses.get("schemaVersion") == 1
     assert licenses.get("externalAssets") == []
     assert "file://" not in html, "viewer should be opened through HTTP, not file://"
+    assert '<html lang="en">' in html, "English must be the default document language"
     viewer = (ROOT / "dist/viewer.js").read_text()
     assert "intermedia-residential.glb" in viewer, "viewer does not reference the released GLB"
     assert 'role="listbox"' in viewer and "component-picker-button" in viewer, "component picker is not the branded custom listbox"
     assert "quality-picker-button" in viewer and "quality-list" in viewer and "quality-select" not in html, "quality picker is not the branded custom listbox"
     assert "axis-picker-button" in viewer and "axis-list" in viewer and "section-axis" not in html, "section orientation is not the branded custom listbox"
+    assert "language-picker-button" in html and "language-list" in html and 'data-language="ro"' in html and "🇬🇧" in html and "🇷🇴" in html, "flag language switcher is missing"
+    assert "setLanguage" in viewer and 'language:"en"' in viewer, "viewer language state is incomplete"
     assert "selectionMarker" in viewer, "selected-element marker is missing"
     assert "SITE_EntranceMarketing" in names and "SITE_SideMarketing" in names, "3D marketing banners missing"
     assert "promo-banner" not in html, "marketing banner should live in the 3D scene, not the sidebar"
